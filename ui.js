@@ -2,6 +2,7 @@
 // KINETIC LUXURY UI MODULE - MAR DEL PLATA
 // ==========================================================================
 
+/* Cache bust: 2026-03-04 17:30:00 */
 /**
  * 1. Inyección de JSON-LD (Schema.org) para Mar del Plata
  */
@@ -122,8 +123,12 @@ function initRouter() {
     // Escuchar cambios de hash para navegar sin recargar
     window.addEventListener('hashchange', renderView);
 
+    // Inyección Forzada
+    stepContainer.innerHTML = '<main class="view-container"><div class="glass-card" style="text-align: center;"><h2 style="color: var(--accent-color);">Cargando Servicios...</h2></div></main>';
+    stepContainer.style.opacity = 1;
+
     // Renderizado inicial
-    renderView();
+    setTimeout(renderView, 500);
 }
 
 /**
