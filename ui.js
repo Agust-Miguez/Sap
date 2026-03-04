@@ -57,20 +57,20 @@ function initRouter() {
     const routes = {
         '#landing': `
             <main class="view-container" style="animation: fadeIn 0.5s ease-in-out;">
-                <div style="text-align: center; max-width: 600px;">
+                <div id="landing-modal" class="active visible" style="text-align: center; max-width: 600px;">
                     <h1 style="color: var(--accent-color); margin-bottom: 1rem;">Descubrí tu Mejor Versión</h1>
                     <p>Accedé a nuestra oferta gancho exclusiva por tiempo limitado en Mar del Plata.</p>
                     <div style="margin: 2rem 0;">
                         <span style="font-size: 1.2rem; color: #aaa; text-decoration: line-through;">Valor real: $<span class="counter" data-target="25000">0</span></span><br>
                         <strong style="font-size: 2rem; color: var(--accent-color);">Hoy: $<span class="counter" data-target="9900">0</span></strong>
                     </div>
-                    <a href="#app" class="btn-luxury">Reservar Turno Ahora</a>
+                    <button class="btn-luxury nav-link" data-target="#app">Reservar Turno Ahora</button>
                 </div>
             </main>
         `,
         '#app': `
             <main class="view-container" style="animation: fadeIn 0.5s ease-in-out;">
-                <div style="text-align: center; max-width: 600px; width: 100%;">
+                <div id="app-modal" class="active visible" style="text-align: center; max-width: 600px; width: 100%;">
                     <h2 style="color: var(--accent-color); margin-bottom: 1rem;">Paso 1: Servicios</h2>
                     <p>Seleccioná tu servicio exclusivo:</p>
 
@@ -93,25 +93,61 @@ function initRouter() {
                         <h3>Total a abonar: $<span id="total-price" class="counter" data-target="0">0</span></h3>
                     </div>
 
-                    <a href="#landing" style="display: inline-block; margin-top: 1rem; color: #aaa; text-decoration: none; font-size: 0.9rem;">← Volver a la oferta</a>
+                    <button class="nav-link" data-target="#landing" style="background: none; border: none; cursor: pointer; display: inline-block; margin-top: 1rem; color: #aaa; text-decoration: none; font-size: 0.9rem;">← Volver a la oferta</button>
                 </div>
             </main>
         `
     };
 
-    function renderView() {
-        const hash = window.location.hash || '#app'; // Por defecto iniciar en #app como se solicitó "apenas cargue la página renderice el Paso 1"
+    // Clean Code: switchView function replacing plain renderView
+    window.switchView = function(targetHash, event) {
+        if (event) {
+            // Prevent event propagation and duplicate handling
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        const hash = targetHash || window.location.hash || '#app';
         const content = routes[hash] || routes['#app'];
+
+        // Remoción de clases de modales actuales
+        const currentModal = stepContainer.querySelector('.active.visible');
+        if (currentModal) {
+            currentModal.classList.remove('active', 'visible');
+        }
+
+        // Hard Reset de URL: Limpiar el parámetro de oferta
+        if (hash === '#app' && window.location.search.includes('oferta=')) {
+            const url = new URL(window.location);
+            url.searchParams.delete('oferta');
+            window.history.replaceState({}, '', url);
+        }
 
         // Transición suave (fade out)
         stepContainer.style.opacity = 0;
 
         setTimeout(() => {
+            // Limpieza de DOM requerida
+            stepContainer.innerHTML = '';
             stepContainer.innerHTML = content;
             stepContainer.style.opacity = 1;
 
             // Re-inicializar contadores tras el render
             initCounters();
+
+            // Bind Navigation Events
+            const navLinks = stepContainer.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // Prevenir propagación como se pidió
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const target = e.currentTarget.getAttribute('data-target');
+                    // Cambiar el hash dispara el evento 'hashchange' el cual llama a switchView automáticamente.
+                    // Para no renderizar dos veces, solo cambiamos el hash.
+                    window.location.hash = target;
+                });
+            });
 
             // Event listeners específicos para la App
             if (hash === '#app') {
@@ -121,14 +157,14 @@ function initRouter() {
     }
 
     // Escuchar cambios de hash para navegar sin recargar
-    window.addEventListener('hashchange', renderView);
+    window.addEventListener('hashchange', (e) => switchView(window.location.hash, e));
 
     // Inyección Forzada
     stepContainer.innerHTML = '<main class="view-container"><div class="glass-card" style="text-align: center;"><h2 style="color: var(--accent-color);">Cargando Servicios...</h2></div></main>';
     stepContainer.style.opacity = 1;
 
     // Renderizado inicial
-    setTimeout(renderView, 500);
+    setTimeout(() => switchView(window.location.hash), 500);
 }
 
 /**
