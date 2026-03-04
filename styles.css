@@ -1,0 +1,174 @@
+/* ==========================================================================
+   KINETIC LUXURY STYLES - MAR DEL PLATA
+   Typography: 'Playfair Display' & 'Montserrat'
+   Theme: Dynamic Views for Booking App / Landing Page
+   ========================================================================== */
+
+/* 1. Fondo con Gradiente Radial y Textura de Ruido (2%) */
+body {
+    position: relative;
+    /* Gradiente radial lujoso: oscuro y dorado sutil */
+    background: radial-gradient(circle at center, #1a1a1a 0%, #0d0d0d 100%);
+    color: #f8f9fa; /* Text claro para contraste */
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Textura de ruido (noise) al 2% de opacidad usando SVG en línea */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    /* opacity: 0.02 equivale al 2% */
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Tipografía de Lujo (Headings) */
+h1, h2, h3, h4, h5, h6, .serif-font {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+/* 2. Clase .glass-card con backdrop-filter: blur(25px) y sombras de 3 capas */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05); /* Fondo muy sutil y semi-transparente */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde suave */
+    border-radius: 16px;
+    padding: 2rem;
+
+    /* El blur solicitado */
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px); /* Safari support */
+
+    /* Sombras de tres capas para profundidad extrema */
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.1),    /* Capa 1: Sombra cercana / ambiental */
+        0 10px 20px rgba(0, 0, 0, 0.15), /* Capa 2: Sombra media / profundidad base */
+        0 25px 50px rgba(0, 0, 0, 0.25); /* Capa 3: Sombra lejana / elevación */
+
+    /* Efecto hover suave (opcional pero acorde a Kinetic Luxury) */
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 8px 12px rgba(0, 0, 0, 0.1),
+        0 20px 30px rgba(0, 0, 0, 0.2),
+        0 35px 60px rgba(0, 0, 0, 0.3);
+}
+
+
+/* 3. Galería Cinética con efecto 'Infinite Scroll' */
+.kinetic-gallery-wrapper {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    padding: 2rem 0;
+    /* Para disimular el corte a los bordes */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.kinetic-gallery {
+    display: inline-flex;
+    gap: 2rem;
+    /* Aceleración por hardware para animaciones fluidas */
+    will-change: transform;
+    animation: infinite-scroll 25s linear infinite;
+}
+
+.kinetic-gallery:hover {
+    animation-play-state: paused; /* Se pausa al hacer hover para interactuar */
+}
+
+/* Animación de scroll infinito con 3D transforms */
+@keyframes infinite-scroll {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        /* Asumiendo que duplicamos el contenido para el loop infinito.
+           -50% mueve exactamente la mitad del ancho del contenedor interno */
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+/* Items de la galería (ejemplo) */
+.gallery-item {
+    width: 300px;
+    height: 400px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    display: inline-block;
+    flex-shrink: 0;
+    /* Hereda los efectos de la tarjeta glass si se le añade la clase .glass-card */
+}
+
+
+/* 4. Botones con animaciones cubic-bezier de 60fps */
+.btn-luxury {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+    background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); /* Oro aspiracional */
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    /* Aceleración GPU y transición suave */
+    will-change: transform, box-shadow;
+    /* cubic-bezier de lujo, rebote sutil */
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Efecto hover fluido */
+.btn-luxury:hover {
+    /* translate3d asegura renderizado en GPU (60fps) */
+    transform: translate3d(0, -4px, 0) scale(1.02);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+}
+
+.btn-luxury:active {
+    transform: translate3d(0, 1px, 0) scale(0.98);
+    transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+/* Capa pseudo-elemento para un brillo/resplandor en hover */
+.btn-luxury::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-luxury:hover::before {
+    opacity: 1;
+}
