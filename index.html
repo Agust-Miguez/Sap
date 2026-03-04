@@ -110,18 +110,7 @@
         </main>
     </div>
 
-    <!-- Script de inicialización de Vistas Dinámicas (Simulado) -->
-    <script>
-        // Lógica de Vistas Dinámicas (Ejemplo conceptual)
-        document.addEventListener('DOMContentLoaded', () => {
-            const appRoot = document.getElementById('app-root');
-
-            // Lógica de enrutamiento o AB testing simulada
-            const showLanding = true; // Determinado por analytics, referer, o estado de sesión
-
-            // Aquí se montaría el framework (React/Vue/Svelte) o se cargarían las vistas Vanilla JS
-            // if (showLanding) { mountLanding(appRoot); } else { mountAppTurnos(appRoot); }
-        });
-    </script>
+    <!-- Script de inicialización de Vistas Dinámicas y Módulos UI -->
+    <script src="ui.js" type="module"></script>
 </body>
 </html>
