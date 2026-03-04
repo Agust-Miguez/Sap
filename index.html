@@ -102,11 +102,26 @@
     -->
     <div id="app-root">
         <!-- Renderizado inicial (SSR/SSG o esqueleto de carga) para mejorar LCP -->
-        <main class="view-container">
-            <div style="text-align: center;">
-                <h1 style="color: var(--primary-color); margin-bottom: 1rem;">Cargando Excelencia...</h1>
-                <p>Preparando su experiencia exclusiva.</p>
+        <main class="view-container" style="flex-direction: column; gap: 2rem;">
+
+            <div id="step-1" class="glass-card" style="width: 100%; max-width: 600px; text-align: center;">
+                <h2 class="serif-font" style="color: var(--accent-color); margin-bottom: 1rem;">Paso 1: Su Visión</h2>
+                <p style="margin-bottom: 2rem;">Descubra el nivel superior de bienestar en Mar del Plata. ¿Qué experiencia busca transformar hoy?</p>
+                <button class="btn-luxury">Continuar</button>
             </div>
+
+            <div id="step-2" class="glass-card" style="width: 100%; max-width: 600px; text-align: center; display: none;">
+                <h2 class="serif-font" style="color: var(--accent-color); margin-bottom: 1rem;">Paso 2: Detalles Exclusivos</h2>
+                <p style="margin-bottom: 2rem;">Seleccione los servicios premium que desea incluir en su reserva.</p>
+                <button class="btn-luxury">Confirmar Selección</button>
+            </div>
+
+            <div id="step-3" class="glass-card" style="width: 100%; max-width: 600px; text-align: center; display: none;">
+                <h2 class="serif-font" style="color: var(--accent-color); margin-bottom: 1rem;">Paso 3: Reserva Confirmada</h2>
+                <p style="margin-bottom: 2rem;">Su turno ha sido agendado con éxito. Le esperamos para vivir la excelencia.</p>
+                <button class="btn-luxury">Volver al Inicio</button>
+            </div>
+
         </main>
     </div>
 
