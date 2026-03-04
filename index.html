@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Local Soberano: Mar del Plata, Argentina -->
+    <meta name="geo.region" content="AR-B">
+    <meta name="geo.placename" content="Mar del Plata">
+    <meta name="geo.position" content="-38.0004;-57.5562">
+    <meta name="ICBM" content="-38.0004, -57.5562">
+    <meta name="description" content="Experimenta la excelencia en servicios exclusivos en Mar del Plata. Reserva tu turno online y descubre nuestra oferta gancho por tiempo limitado.">
+    <meta name="author" content="Tu Marca Exclusiva">
+
+    <!-- Títulos Aspiracionales para Social Graph -->
+    <title>Transforma tu Vida Hoy | Servicios Exclusivos en Mar del Plata</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Transforma tu Vida Hoy | Servicios Exclusivos en Mar del Plata">
+    <meta property="og:description" content="Descubre un nivel superior de bienestar y éxito. Únete a nuestra selecta comunidad en Mar del Plata y accede a ofertas inigualables.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.tumarca.com.ar/">
+    <meta property="og:image" content="https://www.tumarca.com.ar/assets/og-image-aspiracional.jpg">
+    <meta property="og:locale" content="es_AR">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="El Éxito y la Exclusividad te Esperan en Mar del Plata">
+    <meta name="twitter:description" content="Reserva tu turno y aprovecha nuestra oferta exclusiva. Da el primer paso hacia tu mejor versión.">
+    <meta name="twitter:image" content="https://www.tumarca.com.ar/assets/twitter-image-aspiracional.jpg">
+
+    <!-- Optimización LCP: Preload de Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"></noscript>
+
+    <!-- CSS Crítico Inyectado en el <head> para LCP -->
+    <style>
+        /* CSS Crítico */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #d4af37; /* Oro aspiracional */
+            --bg-color: #f8f9fa;
+            --text-color: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Contenedor Principal de Vistas Dinámicas */
+        #app-root {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            width: 100%;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Estilos base para las vistas (simulados para LCP) */
+        .view-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* Spinner de carga inicial para transiciones suaves */
+        .loading {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!--
+      Estructura Dual:
+      Este contenedor será el host para la arquitectura de Vistas Dinámicas.
+      El enrutador frontend inyectará aquí la 'Landing de Oferta Gancho' (optimizada para conversiones)
+      o la 'App de Turnos' (para usuarios recurrentes/listos para reservar).
+    -->
+    <div id="app-root">
+        <!-- Renderizado inicial (SSR/SSG o esqueleto de carga) para mejorar LCP -->
+        <main class="view-container">
+            <div style="text-align: center;">
+                <h1 style="color: var(--primary-color); margin-bottom: 1rem;">Cargando Excelencia...</h1>
+                <p>Preparando su experiencia exclusiva.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script de inicialización de Vistas Dinámicas (Simulado) -->
+    <script>
+        // Lógica de Vistas Dinámicas (Ejemplo conceptual)
+        document.addEventListener('DOMContentLoaded', () => {
+            const appRoot = document.getElementById('app-root');
+
+            // Lógica de enrutamiento o AB testing simulada
+            const showLanding = true; // Determinado por analytics, referer, o estado de sesión
+
+            // Aquí se montaría el framework (React/Vue/Svelte) o se cargarían las vistas Vanilla JS
+            // if (showLanding) { mountLanding(appRoot); } else { mountAppTurnos(appRoot); }
+        });
+    </script>
+</body>
+</html>
