@@ -50,13 +50,13 @@ function injectLocalBusinessSchema() {
  * 2. Router de Vistas Dinámicas (Landing vs App de Turnos)
  */
 function initRouter() {
-    const appRoot = document.getElementById('app-root');
+    const stepContainer = document.getElementById('step-container');
 
     // Mapeo simple de rutas a HTML (en un caso real, podrían ser componentes)
     const routes = {
         '#landing': `
             <main class="view-container" style="animation: fadeIn 0.5s ease-in-out;">
-                <div class="glass-card" style="text-align: center; max-width: 600px;">
+                <div style="text-align: center; max-width: 600px;">
                     <h1 style="color: var(--accent-color); margin-bottom: 1rem;">Descubrí tu Mejor Versión</h1>
                     <p>Accedé a nuestra oferta gancho exclusiva por tiempo limitado en Mar del Plata.</p>
                     <div style="margin: 2rem 0;">
@@ -69,8 +69,8 @@ function initRouter() {
         `,
         '#app': `
             <main class="view-container" style="animation: fadeIn 0.5s ease-in-out;">
-                <div class="glass-card" style="text-align: center; max-width: 600px; width: 100%;">
-                    <h2 style="color: var(--accent-color); margin-bottom: 1rem;">App de Turnos</h2>
+                <div style="text-align: center; max-width: 600px; width: 100%;">
+                    <h2 style="color: var(--accent-color); margin-bottom: 1rem;">Paso 1: Servicios</h2>
                     <p>Seleccioná tu servicio exclusivo:</p>
 
                     <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; text-align: left;">
@@ -99,15 +99,15 @@ function initRouter() {
     };
 
     function renderView() {
-        const hash = window.location.hash || '#landing';
-        const content = routes[hash] || routes['#landing'];
+        const hash = window.location.hash || '#app'; // Por defecto iniciar en #app como se solicitó "apenas cargue la página renderice el Paso 1"
+        const content = routes[hash] || routes['#app'];
 
         // Transición suave (fade out)
-        appRoot.style.opacity = 0;
+        stepContainer.style.opacity = 0;
 
         setTimeout(() => {
-            appRoot.innerHTML = content;
-            appRoot.style.opacity = 1;
+            stepContainer.innerHTML = content;
+            stepContainer.style.opacity = 1;
 
             // Re-inicializar contadores tras el render
             initCounters();
